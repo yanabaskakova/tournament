@@ -71,6 +71,9 @@ const Tournaments = () => {
     const trimmed = name?.trim();
 
     if (trimmed) {
+      // there was no case when user tries to add a new tournament and has active search at the same time
+      // for now i left it as it is
+      // but reset of searchStr can be added here
       dispatch(Actions.createTournament({ name: trimmed }));
     }
   };
