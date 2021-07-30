@@ -1,7 +1,15 @@
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from '../reducers';
+import thunk, { ThunkMiddleware } from 'redux-thunk';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+import { Actions } from '../actions/types';
+import rootReducer, { RootState as RootStateReds } from '../reducers';
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk as ThunkMiddleware<RootStateReds, Actions>)
+);
 
 export default store;
+
+export const useAppSelector: TypedUseSelectorHook<RootStateReds> = useSelector;
